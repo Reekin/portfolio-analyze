@@ -96,6 +96,7 @@ def dashboard(query):
         account=account, algorithm=method,
         metrics=dict(nlv=final, nlvChange=profit, startingNlv=initial, returnPercent=ret,
                      annualizedReturnPercent=((final / initial) ** (365.25 / elapsed) - 1) * 100,
+                     xirrPercent=((final / initial) ** (365 / elapsed) - 1) * 100,
                      realized=realized, unrealized=unrealized, unrealizedChange=profit * .65,
                      totalPnl=profit, netContributions=0, cashNetContributions=0,
                      securityNetTransfers=0, income=income, fees=fees,

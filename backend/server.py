@@ -15,6 +15,10 @@ from datetime import date, datetime, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
+if __package__:
+    from .returns import xirr
+else:
+    from returns import xirr
 
 
 DEFAULT_PORT = 8787
@@ -925,6 +929,18 @@ def dashboard_payload(params: dict[str, list[str]]) -> dict[str, object]:
             - date.fromisoformat(str(series[0]['date']))
         ).days if series else 0
         annualized_return = None
+        xirr_return = None
+        if elapsed_days > 0:
+            origin = date.fromisoformat(str(series[0]['date']))
+            terminal = date.fromisoformat(str(series[-1]['date']))
+            flows = external_flows(conn, origin, terminal, account, rates)
+            cashflows = [(origin, -first_nlv), (terminal, latest_nlv)]
+            cashflows.extend(
+                (date.fromisoformat(day), -amount)
+                for day, amount in flows.items() if origin.isoformat() < day <= terminal.isoformat()
+            )
+            rate = xirr(cashflows)
+            xirr_return = round(rate * 100, 4) if rate is not None else None
         if elapsed_days > 0 and selected_return is not None and selected_return >= -100:
             try:
                 value = ((1 + selected_return / 100) ** (365.25 / elapsed_days) - 1) * 100
@@ -941,6 +957,7 @@ def dashboard_payload(params: dict[str, list[str]]) -> dict[str, object]:
                 "startingNlv": round(first_nlv, 2),
                 "returnPercent": selected_return,
                 "annualizedReturnPercent": annualized_return,
+                "xirrPercent": xirr_return,
                 "realized": round(realized, 2),
                 "unrealized": round(unrealized, 2),
                 "unrealizedChange": round(unrealized_change, 2),

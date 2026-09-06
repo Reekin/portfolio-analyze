@@ -279,10 +279,17 @@ h1 {
 }
 
 .metric-annualized {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 12px;
   margin: 0 0 5px;
   color: var(--ink);
   font-size: 13px;
   font-variant-numeric: tabular-nums;
+}
+
+.metric-annualized > span {
+  white-space: nowrap;
 }
 
 .metric-inner {

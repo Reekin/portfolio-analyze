@@ -73,6 +73,11 @@ rates and daily breakout. Some sections are empty when there is no activity.
 
 ## Calculation Notes
 
+The return card shows annualized performance alongside XIRR, an annual
+money-weighted return using dated net contributions and opening/closing values
+with an Actual/365 day count. The opening value already includes flows on its
+valuation date. Same-day periods and unresolved rates display a dash.
+
 Statement valuations are the broker's daily marks and may differ from executable
 liquidation prices. Closed-trade profit uses Flex FIFO values. Benchmarks use Yahoo
 Finance adjusted close; the chart endpoint is an unofficial service and may change.

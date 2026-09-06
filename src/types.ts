@@ -74,6 +74,7 @@ export interface Dashboard {
     startingNlv: number;
     returnPercent: number | null;
     annualizedReturnPercent: number | null;
+    xirrPercent: number | null;
     realized: number;
     unrealized: number;
     unrealizedChange: number;

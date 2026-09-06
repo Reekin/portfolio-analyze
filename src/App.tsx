@@ -120,7 +120,7 @@ function MetricCard({
   label: string;
   value: string;
   detail: string;
-  secondary?: string;
+  secondary?: React.ReactNode;
   tone?: "positive" | "negative" | "neutral";
   icon: React.ReactNode;
 }) {
@@ -488,7 +488,10 @@ function App() {
                   value={
                     metric!.returnPercent == null ? "—" : `${metric!.returnPercent >= 0 ? "+" : ""}${number.format(metric!.returnPercent)}%`
                   }
-                  secondary={t("annualized", { value: metric!.annualizedReturnPercent == null ? "—" : `${metric!.annualizedReturnPercent >= 0 ? "+" : ""}${number.format(metric!.annualizedReturnPercent)}%` })}
+                  secondary={<>
+                    <span>{t("annualized", { value: metric!.annualizedReturnPercent == null ? "—" : `${metric!.annualizedReturnPercent >= 0 ? "+" : ""}${number.format(metric!.annualizedReturnPercent)}%` })}</span>
+                    <span title={t("xirrDescription")}>{t("xirr", { value: metric!.xirrPercent == null ? "—" : `${metric!.xirrPercent >= 0 ? "+" : ""}${number.format(metric!.xirrPercent)}%` })}</span>
+                  </>}
                   detail={method === "SIMPLE" ? t("净值变化，含资金进出影响") : t("已调整外部资金流")}
                   tone={(metric!.returnPercent ?? 0) >= 0 ? "positive" : "negative"}
                   icon={<ChartLineUp size={20} />}
