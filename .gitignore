@@ -10,6 +10,7 @@ __pycache__/
 !/.gitignore
 !/LICENSE
 !/README.md
+!/README.zh-CN.md
 !/THIRD_PARTY_NOTICES.md
 !/index.html
 !/package.json
@@ -27,6 +28,7 @@ __pycache__/
 /scripts/*
 !/scripts/ibkr_analyzer.py
 !/scripts/daily_sync.py
+!/scripts/demo_preview.py
 !/scripts/.env.example
 
 .env
@@ -52,3 +54,10 @@ __pycache__/
 **/raw/
 **/artifacts/
 **/analysis/
+
+# Only this synthetic preview image is approved for publication.
+!/docs/
+/docs/*
+!/docs/images/
+/docs/images/*
+!/docs/images/overview-en.png

@@ -1,8 +1,39 @@
 # Portfolio Analyze
 
+**English** | [简体中文](README.zh-CN.md)
+
 A local portfolio dashboard for Interactive Brokers Flex statements, built with
-React, Wealthfolio UI, Recharts and a Python/SQLite backend. The interface is in
-Chinese. Account data stays on the machine running the application.
+React, Wealthfolio UI, Recharts and a Python/SQLite backend. Available in English
+and Simplified Chinese. Account data stays on the machine running the application.
+
+![Portfolio Analyze dashboard with synthetic demonstration data](docs/images/overview-en.png)
+
+*Illustrative preview generated entirely from synthetic data. No real accounts,
+holdings, transactions or investment results are shown.*
+
+## Features
+
+- English / 简体中文 switch with a saved language preference.
+- Account and custom date filters, plus 1W, MTD, 1M, 3M, YTD, 1Y and ALL ranges.
+- Daily net asset value, TWR, Modified Dietz returns and annualized returns.
+- SPY and QQQ benchmark comparison on a shared percentage axis.
+- Position details, FIFO closed-lot profit, dividends and cash movements.
+- Per-symbol filters and period totals for dividends and closed-trade profit.
+- Local SQLite storage with command-line imports and synchronization.
+
+## Try the Preview
+
+Requires Python 3.10+ and Node.js 22.12+. No IBKR credentials are needed.
+
+```powershell
+npm ci
+npm run build
+python scripts/demo_preview.py
+```
+
+Open `http://127.0.0.1:4180`. The preview serves the same application with
+deterministic synthetic data and does not access account databases or external
+services. Stop it with Ctrl+C. Use the header language control to switch languages.
 
 ## Run on Windows
 
@@ -40,13 +71,7 @@ Information, Transfers, Commission Details, Transaction Fees/Taxes, Net Asset
 Value in Base, and Mark-to-Market Performance Summary in Base. Include currency
 rates and daily breakout. Some sections are empty when there is no activity.
 
-## Dashboard
-
-- Account, date range and return-method filters.
-- Daily statement net asset value and performance comparison with SPY/QQQ.
-- TWR, simple NAV change and Modified Dietz returns, with annualized equivalents.
-- Positions, closed-lot profit/loss, dividends, cash movements and costs.
-- Per-symbol or all-symbol dividend and closed-profit charts with period totals.
+## Calculation Notes
 
 Statement valuations are the broker's daily marks and may differ from executable
 liquidation prices. Closed-trade profit uses Flex FIFO values. Benchmarks use Yahoo
